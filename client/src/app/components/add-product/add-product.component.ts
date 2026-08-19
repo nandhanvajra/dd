@@ -23,8 +23,33 @@ export class AddProductComponent {
 
   constructor(private productService: ProductService) {}
 
+  isProductValid(): boolean {
+    return Number.isInteger(this.product.pid) && (this.product.pid as number) > 0 &&
+      typeof this.product.pname === 'string' && this.product.pname.trim().length > 0 &&
+      Number.isFinite(this.product.price) && (this.product.price as number) >= 0 &&
+      typeof this.product.brand === 'string' && this.product.brand.trim().length > 0;
+  }
+
+  preventInvalidNumberKey(event: KeyboardEvent, allowDecimal = false): void {
+    const navigationKeys = ['Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight', 'Home', 'End'];
+    if (navigationKeys.includes(event.key) || event.ctrlKey || event.metaKey) {
+      return;
+    }
+
+    if (/^\d$/.test(event.key)) {
+      return;
+    }
+
+    const input = event.target as HTMLInputElement;
+    if (allowDecimal && event.key === '.' && !input.value.includes('.')) {
+      return;
+    }
+
+    event.preventDefault();
+  }
+
   onSubmit(form: NgForm): void {
-    if (form.invalid) {
+    if (form.invalid || !this.isProductValid()) {
       return;
     }
 

@@ -12,6 +12,8 @@
         required
         min="1"
         step="1"
+        inputmode="numeric"
+        (keydown)="preventInvalidNumberKey($event)"
         placeholder="Enter Product ID (e.g. 104)"
       />
     </div>
@@ -26,7 +28,6 @@
         [(ngModel)]="product.pname"
         #pname="ngModel"
         required
-        pattern=".*\\S.*"
         placeholder="Enter Product Name (e.g. Smart Watch)"
       />
     </div>
@@ -42,6 +43,9 @@
         #price="ngModel"
         required
         min="0"
+        step="any"
+        inputmode="decimal"
+        (keydown)="preventInvalidNumberKey($event, true)"
         placeholder="Enter Price (e.g. 15000)"
       />
     </div>
@@ -56,7 +60,6 @@
         [(ngModel)]="product.brand"
         #brand="ngModel"
         required
-        pattern=".*\\S.*"
         placeholder="Enter Brand Name (e.g. Apple)"
       />
     </div>
@@ -65,7 +68,7 @@
       <button
         type="submit"
         class="btn-submit"
-        [disabled]="productForm.invalid || isSubmitting"
+        [disabled]="!isProductValid() || isSubmitting"
       >
         Add Product
       </button>

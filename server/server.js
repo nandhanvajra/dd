@@ -104,6 +104,7 @@ app.get('/getallproducts', isDatabaseReady, async (req, res) => {
 async function startServer() {
   try {
     await mongoose.connect(MONGO_URI);
+    await Product.init();
     await seedInitialProducts();
     console.log(`Connected to MongoDB at ${MONGO_URI}`);
     app.listen(PORT, () => {
