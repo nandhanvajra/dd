@@ -1,0 +1,74 @@
+<div class="form-container">
+  <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)" novalidate>
+    <div class="form-group">
+      <label for="pid">PID:</label>
+      <input
+        type="number"
+        id="pid"
+        name="pid"
+        class="form-control"
+        [(ngModel)]="product.pid"
+        #pid="ngModel"
+        required
+        min="1"
+        step="1"
+        placeholder="Enter Product ID (e.g. 104)"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="pname">Product Name:</label>
+      <input
+        type="text"
+        id="pname"
+        name="pname"
+        class="form-control"
+        [(ngModel)]="product.pname"
+        #pname="ngModel"
+        required
+        pattern=".*\\S.*"
+        placeholder="Enter Product Name (e.g. Smart Watch)"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="price">Price:</label>
+      <input
+        type="number"
+        id="price"
+        name="price"
+        class="form-control"
+        [(ngModel)]="product.price"
+        #price="ngModel"
+        required
+        min="0"
+        placeholder="Enter Price (e.g. 15000)"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="brand">Brand:</label>
+      <input
+        type="text"
+        id="brand"
+        name="brand"
+        class="form-control"
+        [(ngModel)]="product.brand"
+        #brand="ngModel"
+        required
+        pattern=".*\\S.*"
+        placeholder="Enter Brand Name (e.g. Apple)"
+      />
+    </div>
+
+    <div class="form-actions">
+      <button
+        type="submit"
+        class="btn-submit"
+        [disabled]="productForm.invalid || isSubmitting"
+      >
+        Add Product
+      </button>
+    </div>
+  </form>
+</div>

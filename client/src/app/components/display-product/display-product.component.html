@@ -1,0 +1,33 @@
+<div class="display-container">
+  <div *ngIf="isLoading" class="loading-state">
+    Loading products...
+  </div>
+
+  <div *ngIf="errorMessage" class="error-state">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage">
+    <table class="products-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Brand</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prod of products">
+          <td>{{ prod.pid }}</td>
+          <td>{{ prod.pname }}</td>
+          <td>{{ prod.price }}</td>
+          <td>{{ prod.brand }}</td>
+        </tr>
+        <tr *ngIf="products.length === 0">
+          <td colspan="4" class="no-data">No products available.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

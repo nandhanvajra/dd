@@ -1,0 +1,15 @@
+{
+  "name": "shopping-admin-backend",
+  "version": "1.0.0",
+  "description": "Express backend for New INDIA Online Shopping Admin Dashboard",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "seed": "node seed.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.3.1"
+  }
+}
